@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -49,10 +51,11 @@ class _ContactsPageState extends State<ContactsPage> {
                 return ListTile(
                   title: Text('${contacts[index].displayName}'),
                   subtitle: Text(
-                      '${contacts[index].phones!.first.value} \n ${contacts[index].emails!.isNotEmpty ? contacts[index].emails!.first.value : ''}'),
+                      '${contacts[index].phones!.first.value!.replaceAll(' ', '').replaceAll('-', '')} \n ${contacts[index].emails!.isNotEmpty ? contacts[index].emails!.first.value : ''}'),
                   leading: Icon(
                     Icons.person,
-                    color: Colors.primaries.first,
+                    color: Colors
+                        .primaries[Random().nextInt(Colors.primaries.length)],
                   ),
                 );
               },
